@@ -15,11 +15,11 @@ sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
 
 # Connect the socket to the port where the server is listening
 sock_addr = '/tmp/fastd_status.socket'
-print >>sys.stderr, 'connecting to %s' % sock_addr
+#print >>sys.stderr, 'connecting to %s' % sock_addr
 try:
 	sock.connect(sock_addr)
 except socket.error, msg:
-	print >>sys.stderr, msg
+	#print >>sys.stderr, msg
 	sys.exit(1)
 
 
@@ -49,8 +49,8 @@ try:
 			connected = connected | Set(yaml.load(t["data"])["connected"])
 			disconnected = disconnected | Set(yaml.load(t["data"])["disconnected"])
 	except Exception, msg:
-		print >>sys.stderr, msg
-		print("alfred Failed")
+		#print >>sys.stderr, msg
+		#print("alfred Failed")
 		sys.exit(1)
 	amount_received = 0
 	#amount_expected = len(message)
@@ -76,10 +76,10 @@ try:
 	#f.close()
 	#print yaml.safe_dump(nodes, encoding='utf-8', allow_unicode=True)
 	channel.set(yaml.safe_dump(nodes, encoding='utf-8', allow_unicode=True))
-	print len(connected)
-	print len(disconnected)
+	#print len(connected)
+	#print len(disconnected)
 
 finally:
-	print >>sys.stderr, 'closing socket'
+	#print >>sys.stderr, 'closing socket'
 	sock.close()
  
